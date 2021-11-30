@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Code #2</title>
+</head>
+<body>
+    
+   <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">BufferedReader</span>;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.InputStreamReader;
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> class Program
+{
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> main(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">String</span>[] args) <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException {
+		
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">BufferedReader</span> nameInput = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">BufferedReader</span>(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> InputStreamReader(System.in));
+        
+        <span class="hljs-built_in" style="color: rgb(166, 226, 46);">int</span> nameLimit = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">String</span> names[] = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">String</span>[nameLimit];
+
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">for</span>(<span class="hljs-built_in" style="color: rgb(166, 226, 46);">int</span> x=<span class="hljs-number">0</span>;x&lt;nameLimit;x++){
+            <span class="hljs-built_in" style="color: rgb(166, 226, 46);">int</span> numList = x+<span class="hljs-number">1</span>;
+            System.out.<span class="hljs-built_in" style="color: rgb(166, 226, 46);">print</span>(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter name #"</span>+numList+<span class="hljs-string" style="color: rgb(166, 226, 46);">": "</span>);
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">String</span> name = nameInput.readLine();
+            names[x] = name;
+        }
+        
+        System.out.<span class="hljs-built_in" style="color: rgb(166, 226, 46);">println</span>(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n\nList of Names:"</span>);
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">for</span>(<span class="hljs-built_in" style="color: rgb(166, 226, 46);">int</span> x=<span class="hljs-number">0</span>;x&lt;nameLimit;x++){
+           <span class="hljs-built_in" style="color: rgb(166, 226, 46);">int</span> numList = x+<span class="hljs-number">1</span>;
+           System.out.<span class="hljs-built_in" style="color: rgb(166, 226, 46);">println</span>(numList+<span class="hljs-string" style="color: rgb(166, 226, 46);">". "</span>+names[x]);
+       }
+
+	}
+}</pre>
+	
+
+</body>
+</html>
