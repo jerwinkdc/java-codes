@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - Calc.class (Java)</title>
+</head>
+<body>
+ 
+  <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">package</span> delacruz.lab3;
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.InputStreamReader;
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">//@author Jerwin</span>
+
+<span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">Calc</span> </span>{
+
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//VARIABLES</span>
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+    BufferedReader userInput = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BufferedReader(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> InputStreamReader(System.in));
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> userCurrentChoice;
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> a, b, c, radius, height;
+    
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//MENU</span>
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">mainMenu</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"1. Addition"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"2. Subtraction"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"3. Area of Circle"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"4. Area of Cylinder"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"----------------------"</span>);
+            System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter your choice: "</span>);
+            userCurrentChoice = getMenuInput();
+    }
+    
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//METHODS</span>
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getNormalInputs</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+        System.out.println();
+        System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter first number: "</span>);
+        a = getNumberInput();
+        System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter second number: "</span>);
+        b = getNumberInput();
+        System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter third number: "</span>);
+        c = getNumberInput();
+        System.out.println();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getCircleInput</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+       System.out.println();
+       System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the radius: "</span>);
+       radius = getNumberInput();
+       System.out.println();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getCylinderInputs</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+       System.out.println();
+       System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the radius: "</span>);
+       radius = getNumberInput();
+       System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the height: "</span>);
+       height = getNumberInput();
+       System.out.println();
+    }
+    
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//INPUT GETTER SETTER</span>
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getMenuInput</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> input;
+              <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">try</span> { input = Integer.parseInt(userInput.readLine()); }
+              <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">catch</span>(NumberFormatException e) { input = <span class="hljs-number">0</span>; }
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getNumberInput</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> input = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">try</span> {
+            input = Double.parseDouble(userInput.readLine());
+        }
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">catch</span>(NumberFormatException e){
+            errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+        }
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+    }
+    
+   <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getNormalOutput</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> input)</span></span>{
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> cinput = (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span>) input;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(cinput == input){ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(cinput); }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(input); }
+   }
+   
+   <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getCircleOutput</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> radius)</span></span>{
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> minput = Math.PI*Math.pow(radius, <span class="hljs-number">2</span>);
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> rinput = Double.parseDouble(String.format(<span class="hljs-string" style="color: rgb(166, 226, 46);">"%.2f"</span>, minput));
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> cinput = (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span>) minput;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(cinput == minput){ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(cinput); }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(rinput); }
+   }
+   
+   <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getCylinderOutput</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> radius, <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> height)</span></span>{
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> minput = (<span class="hljs-number">2</span>*Math.PI*Math.pow(radius, <span class="hljs-number">2</span>))+(<span class="hljs-number">2</span>*Math.PI*radius*height);
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">double</span> rinput = Double.parseDouble(String.format(<span class="hljs-string" style="color: rgb(166, 226, 46);">"%.2f"</span>, minput));
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> cinput = (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span>) minput;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(cinput == minput){ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(cinput); }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> String.valueOf(rinput); }
+   }
+    
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//MENU RETURNS</span>
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">choice</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> userCurrentChoice;
+    }
+
+    <span class="hljs-comment" style="color: rgb(117, 113, 94);">//MAIN RETURNS</span>
+    <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">addition</span><span class="hljs-params">()</span> </span>{
+       String answer;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>){ answer = <span class="hljs-string" style="color: rgb(166, 226, 46);">"undefined."</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ answer = getNormalOutput(a+b+c)+<span class="hljs-string" style="color: rgb(166, 226, 46);">"!"</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> answer;
+    }
+
+    <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">subtraction</span><span class="hljs-params">()</span> </span>{
+       String answer;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>){ answer = <span class="hljs-string" style="color: rgb(166, 226, 46);">"undefined."</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ answer = getNormalOutput(a-b-c)+<span class="hljs-string" style="color: rgb(166, 226, 46);">"!"</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> answer;
+    }
+
+    <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">AreaCircle</span><span class="hljs-params">()</span> </span>{
+       String answer;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>){ answer = <span class="hljs-string" style="color: rgb(166, 226, 46);">"undefined."</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ answer = getCircleOutput(radius)+<span class="hljs-string" style="color: rgb(166, 226, 46);">"!"</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> answer;
+    }
+
+    <span class="hljs-function">String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">AreaCylinder</span><span class="hljs-params">()</span> </span>{
+       String answer;
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>){ answer = <span class="hljs-string" style="color: rgb(166, 226, 46);">"undefined."</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{ answer = getCylinderOutput(radius,height)+<span class="hljs-string" style="color: rgb(166, 226, 46);">"!"</span>; }
+       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> answer;
+    }
+    
+}</pre>
+  
+</body>
+</html>
