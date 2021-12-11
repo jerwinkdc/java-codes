@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalaryMethod.java (Java Sub Class)</title>
+</head>
+<body>
+
+
+  
+  <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-comment" style="color: rgb(117, 113, 94);">//@author Jerwin</span>
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SalaryMethods</span> </span>{
+  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> gross_pay, total_deducations, net_pay;
+  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">final</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> wage = (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span>)<span class="hljs-number">500.00</span>;
+  
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_Wage</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+String.format(<span class="hljs-string" style="color: rgb(166, 226, 46);">"%.2f"</span>, wage);
+        }
+  
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_GrossSalary</span><span class="hljs-params">(SalaryData data)</span></span>{
+            gross_pay = data.daysWorked * wage;
+            data.gross = gross_pay;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(gross_pay);
+        }
+        
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_TotalDeduction</span><span class="hljs-params">(SalaryData data)</span></span>{
+            total_deducations = data.philhealth_contribution + 
+                                data.sss_contribution +
+                                data.pagibig_contribution;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(total_deducations);
+        }
+        
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_NetSalary</span><span class="hljs-params">(SalaryData data)</span></span>{
+            net_pay = gross_pay - total_deducations;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(net_pay);
+        }
+
+}</pre>
+</body>
+</html>
