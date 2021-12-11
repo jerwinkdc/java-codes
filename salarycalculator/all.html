@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SalaryCalculator.java (Java Main Class) [ALL-IN]</title>
+</head>
+<body>
+    
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.InputStreamReader;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.text.DecimalFormat;
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">//@author Jerwin</span>
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SalaryCalculator</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+       
+        SalaryData data = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> SalaryData();
+        
+        data.getInputs();
+        
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n---------------------------------"</span>);
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Employee's Name: "</span>+data.employee);
+        
+        System.out.println();
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"No. of days worked: "</span>+data.daysWorked);
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Wage per day: "</span>+data.get_Wage());
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Gross Salay: "</span>+data.get_GrossSalary(data));
+        
+        System.out.println();
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"PhilHealth Contribution: "</span>+data.get_PhilHealth_contribution());
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"SSS Contribution: "</span>+data.get_SSS_contribution());
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"PAG-IBIG Contribution: "</span>+data.get_PagIbig_contribution());
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Total Deductions: "</span>+data.get_TotalDeduction(data));
+        
+        System.out.println();
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Net Salary: "</span>+data.get_NetSalary(data));
+        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"---------------------------------"</span>);
+        
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SalaryData</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">extends</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SalaryMethods</span> </span>{
+    
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">final</span> BufferedReader userInput = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BufferedReader(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> InputStreamReader(System.in));
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String employee;
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> daysWorked;
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> gross, philhealth_contribution, sss_contribution, pagibig_contribution;
+            
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getInputs</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+        System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter Name: "</span>);
+        employee = userInput.readLine();
+        daysWorked = getNumberInput();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getNumberInput</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+      
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> input = <span class="hljs-number">0</span>;
+        do{
+                System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter No. of days worked: "</span>);
+                errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">try</span> {
+                    input = Integer.parseInt(userInput.readLine());
+                }
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">catch</span>(NumberFormatException e){
+                    errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                }
+            }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+        
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getDeduction</span><span class="hljs-params">(String deduction)</span></span>{
+        deduction = deduction.replace(<span class="hljs-string" style="color: rgb(166, 226, 46);">"%"</span>, <span class="hljs-string" style="color: rgb(166, 226, 46);">""</span>);
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> (Float.parseFloat(deduction) / <span class="hljs-number">100</span>);
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">formatOutput</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> output)</span></span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> DecimalFormat(<span class="hljs-string" style="color: rgb(166, 226, 46);">"#,###.00"</span>).format(output);
+    }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_PhilHealth_contribution</span><span class="hljs-params">()</span></span>{
+            philhealth_contribution = gross * getDeduction(<span class="hljs-string" style="color: rgb(166, 226, 46);">"2.75%"</span>);
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+formatOutput(philhealth_contribution);
+        }
+        
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_SSS_contribution</span><span class="hljs-params">()</span></span>{
+            sss_contribution = gross * getDeduction(<span class="hljs-string" style="color: rgb(166, 226, 46);">"3.36%"</span>);
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+formatOutput(sss_contribution);
+        }
+        
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_PagIbig_contribution</span><span class="hljs-params">()</span></span>{
+            pagibig_contribution = gross * getDeduction(<span class="hljs-string" style="color: rgb(166, 226, 46);">"2%"</span>);
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+formatOutput(pagibig_contribution);
+        }
+
+
+    
+    
+
+}
+
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SalaryMethods</span> </span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> gross_pay, total_deducations, net_pay;
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">final</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span> wage = (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">float</span>)<span class="hljs-number">500.00</span>;
+
+              <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_Wage</span><span class="hljs-params">()</span></span>{
+                  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+String.format(<span class="hljs-string" style="color: rgb(166, 226, 46);">"%.2f"</span>, wage);
+              }
+
+              <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_GrossSalary</span><span class="hljs-params">(SalaryData data)</span></span>{
+                  gross_pay = data.daysWorked * wage;
+                  data.gross = gross_pay;
+                  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(gross_pay);
+              }
+
+              <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_TotalDeduction</span><span class="hljs-params">(SalaryData data)</span></span>{
+                  total_deducations = data.philhealth_contribution + 
+                                      data.sss_contribution +
+                                      data.pagibig_contribution;
+                  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(total_deducations);
+              }
+
+              <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">get_NetSalary</span><span class="hljs-params">(SalaryData data)</span></span>{
+                  net_pay = gross_pay - total_deducations;
+                  <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>+data.formatOutput(net_pay);
+              }
+
+      }
+    
+}
+</pre>
+  
+</body>
+</html>
