@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - SampleLaboratory3.java (Java Main Class)</title>
+</head>
+<body>
+    
+    <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">package</span> delacruz.lab3;
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">//@author Jerwin</span>
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">SampleLaboratory3</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+        Calc gg = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> Calc();
+        
+        gg.mainMenu();
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">switch</span>(gg.choice()){
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">1</span>:
+                gg.getNormalInputs();
+                System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"The sum is "</span>+gg.addition());
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">2</span>:
+                gg.getNormalInputs();
+                System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"The difference is "</span>+gg.subtraction());
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">3</span>:
+                gg.getCircleInput();
+                System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"The area of the circle is "</span>+gg.AreaCircle());
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">4</span>:
+                gg.getCylinderInputs();
+                System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"The area of the cylinder is "</span>+gg.AreaCylinder());
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">default</span>:
+                System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Wrong Input"</span>);
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+        }
+    }
+    
+}
+</pre>
+
+</body>
+</html>
