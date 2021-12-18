@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM.java (Java Main Class) [ALL-IN]</title>
+</head>
+<body>
+    
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.InputStreamReader;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.math.BigDecimal;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.text.DecimalFormat;
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.util.ArrayList;
+
+<span class="hljs-comment" style="color: rgb(117, 113, 94);">//@author Jerwin</span>
+
+<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">ATM</span> </span>{
+    
+    <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+        
+        ATMMachine machine = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> ATMMachine();
+        
+        machine.initComponents();
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(machine.getCredentials()){
+            System.out.println();
+            machine.accessATM();
+        }
+        
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">ATMMachine</span> </span>{
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">final</span> BufferedReader atmInput = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BufferedReader(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> InputStreamReader(System.in));
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> ArrayList&lt;Members&gt; member = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> ArrayList();
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> mainIndex;
+
+        <span class="hljs-comment" style="color: rgb(117, 113, 94);">//MAIN</span>
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">initComponents</span><span class="hljs-params">()</span></span>{
+            loadDatabase();
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">loadDatabase</span><span class="hljs-params">()</span></span>{
+            member.add(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> Members(<span class="hljs-string" style="color: rgb(166, 226, 46);">"John"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"******"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"50000"</span>));
+            member.add(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> Members(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Joan"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"********"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"25000"</span>));
+            member.add(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> Members(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Shelia"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"****"</span>,<span class="hljs-string" style="color: rgb(166, 226, 46);">"65000"</span>));
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getCredentials</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+
+            String tempUsername, tempPassword, curUsername, curPassword;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> userIndex;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> userFound, userPass;
+
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"[Enter an empty input to exit]"</span>);
+            do{
+
+                userIndex = <span class="hljs-number">0</span>;
+                userFound = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                userPass = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+
+                tempUsername = getATMInput(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter your username: "</span>);
+                tempPassword = getATMInput(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter your password: "</span>);
+
+                     <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">for</span> (<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> x = <span class="hljs-number">0</span>; x &lt; member.size(); x++) { 
+                         curUsername = (member.get(x).getUsername()).toLowerCase();
+                         <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(tempUsername.equals(curUsername)){
+                             userIndex = x;
+                             userFound = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                             <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                         }
+                     }
+
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(userFound == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>){
+                        curPassword = (member.get(userIndex).getPassword()).toLowerCase();
+                       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(tempPassword.equals(curPassword)){
+                          userPass = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                       }
+                       <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{
+                           System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Invalid Password!"</span>);
+                       }
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{
+                       System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Username Not Found!"</span>);
+                    }
+
+                }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(!userPass);
+
+             mainIndex = userIndex;
+             <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> userPass;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">accessATM</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            String logUsername = member.get(mainIndex).getUsername();
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> choice;
+
+        do{
+            choice = <span class="hljs-number">0</span>;
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Welcome "</span>+logUsername+<span class="hljs-string" style="color: rgb(166, 226, 46);">"! (ATM)"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter [1] to Withdraw"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter [2] to Deposit"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter [3] to Check Balance"</span>);
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter [4] to Logout"</span>);
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">switch</span>(getATMChoice(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the number of operation: "</span>, <span class="hljs-number">4</span>)){
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">1</span>:
+                     withdraw();
+                     <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">2</span>:
+                     deposit();    
+                     <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">3</span>:
+                     balance();
+                     <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">case</span> <span class="hljs-number">4</span>:
+                     logoutUser();    
+                     <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>; 
+                }
+
+            }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+
+        }
+
+        <span class="hljs-comment" style="color: rgb(117, 113, 94);">//MENUS</span>
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">withdraw</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            BigDecimal money = member.get(mainIndex).getMoney();
+            BigDecimal withdrawn, newDeductedAmount;
+
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured;
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n[Enter 0 to exit]"</span>);
+            do{
+                errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                withdrawn = getATMUserMoney(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the amount of money to be withdrawn:"</span>);
+                newDeductedAmount = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(<span class="hljs-string" style="color: rgb(166, 226, 46);">"0"</span>);
+                newDeductedAmount = newDeductedAmount.add(money);
+                newDeductedAmount = newDeductedAmount.subtract(withdrawn);
+
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(newDeductedAmount.compareTo(BigDecimal.valueOf(<span class="hljs-number">100</span>)) == -<span class="hljs-number">1</span>){
+                        System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Please withdraw a maintaing balance of \u20B1100!\n"</span>);
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(withdrawn.compareTo(BigDecimal.ZERO) == -<span class="hljs-number">1</span>){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(withdrawn.compareTo(BigDecimal.ZERO) == <span class="hljs-number">0</span>){
+                        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                    }
+
+                        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>){
+                            member.get(mainIndex).setMoney(String.valueOf(newDeductedAmount));
+                            System.out.println(withdrawOutput(formatOutput(withdrawn)));
+                            System.out.println();
+                        }
+
+                }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">withdrawOutput</span><span class="hljs-params">(String withdrawn)</span></span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"An amount of \u20B1"</span>+withdrawn+<span class="hljs-string" style="color: rgb(166, 226, 46);">" has been withdrawn to your account!"</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">deposit</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            BigDecimal money = member.get(mainIndex).getMoney();
+            BigDecimal deposited, newTotalAmount;
+            BigDecimal maxValue = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(<span class="hljs-string" style="color: rgb(166, 226, 46);">"999999999999999999"</span>);
+
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured;
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n[Enter 0 to exit]"</span>);
+            do{
+                errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                deposited = getATMUserMoney(<span class="hljs-string" style="color: rgb(166, 226, 46);">"Enter the amount of money to be deposited:"</span>);
+                newTotalAmount = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(<span class="hljs-string" style="color: rgb(166, 226, 46);">"0"</span>);
+                newTotalAmount = newTotalAmount.add(money);
+                newTotalAmount = newTotalAmount.add(deposited);
+
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(newTotalAmount.compareTo(maxValue) == <span class="hljs-number">1</span>){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(deposited.compareTo(BigDecimal.ZERO) == -<span class="hljs-number">1</span>){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(!realMoney(deposited)){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(deposited.compareTo(BigDecimal.ZERO) == <span class="hljs-number">0</span>){
+                        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">break</span>;
+                    }
+
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>){
+                        member.get(mainIndex).setMoney(String.valueOf(newTotalAmount));
+                        System.out.println(depositOutput(formatOutput(deposited)));
+                        System.out.println();
+                    }
+
+                }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">depositOutput</span><span class="hljs-params">(String deposited)</span></span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-string" style="color: rgb(166, 226, 46);">"An amount of \u20B1"</span>+deposited+<span class="hljs-string" style="color: rgb(166, 226, 46);">" has been deposited to your account!"</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">balance</span><span class="hljs-params">()</span></span>{
+            BigDecimal money = member.get(mainIndex).getMoney();
+            System.out.println(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\nYour balance is \u20B1"</span>+formatOutput(money)+<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n"</span>);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">logoutUser</span><span class="hljs-params">()</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            System.out.println();
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(getCredentials()){
+                System.out.println();
+                accessATM();
+            }
+        }
+
+        <span class="hljs-comment" style="color: rgb(117, 113, 94);">//INPUTS</span>
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getATMInput</span><span class="hljs-params">(String display)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException </span>{
+                String input;
+                System.out.print(display);
+                    input = atmInput.readLine();
+                    input = input.toLowerCase();
+
+                        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(input.length() == <span class="hljs-number">0</span>){
+                            System.exit(<span class="hljs-number">0</span>);
+                        }
+
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getATMChoice</span><span class="hljs-params">(String display, <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> limit)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured;
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> input = <span class="hljs-number">0</span>;
+            do{
+                    System.out.print(display);
+                    errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">try</span> {
+
+                        input = Integer.parseInt(atmInput.readLine());
+                            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(input &lt; <span class="hljs-number">0</span> || input &gt; limit){
+                               errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                            }
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">catch</span>(NumberFormatException e){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> BigDecimal <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getATMUserMoney</span><span class="hljs-params">(String display)</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">throws</span> IOException</span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> errorOccured;
+            BigDecimal input = BigDecimal.valueOf(<span class="hljs-number">0</span>);
+            do{
+                    System.out.print(display+<span class="hljs-string" style="color: rgb(166, 226, 46);">"\n"</span>);
+                    System.out.print(<span class="hljs-string" style="color: rgb(166, 226, 46);">"\u20B1"</span>);
+                    errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">false</span>;
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">try</span> {
+
+                        input = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(atmInput.readLine());
+                    }
+                    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">catch</span>(NumberFormatException e){
+                        errorOccured = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+                    }
+                    System.out.println();
+                }<span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">while</span>(errorOccured == <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>);
+
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> input;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">realMoney</span><span class="hljs-params">(BigDecimal input)</span> </span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">boolean</span> condition;
+            String test = String.valueOf(input);
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">if</span>(test.contains(<span class="hljs-string" style="color: rgb(166, 226, 46);">"."</span>)){
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> startSTR = test.indexOf(<span class="hljs-string" style="color: rgb(166, 226, 46);">"."</span>)+<span class="hljs-number">1</span>;
+                <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">int</span> endSTR = test.length();
+                String decimal = test.substring(startSTR, endSTR);
+                condition = (decimal.length() &lt;= <span class="hljs-number">2</span>);
+            }
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">else</span>{
+                condition = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">true</span>;
+            }
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> condition;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">formatOutput</span><span class="hljs-params">(BigDecimal output)</span></span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> DecimalFormat(<span class="hljs-string" style="color: rgb(166, 226, 46);">"#,##0.00"</span>).format(output);
+        }
+    
+    
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">static</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">class</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">Members</span> </span>{
+
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">final</span> String name, password;
+        <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">private</span> BigDecimal money;
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">Members</span><span class="hljs-params">(String name, String password, String money)</span> </span>{
+             <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">this</span>.name = name;
+             <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">this</span>.password = password;
+             <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">this</span>.money = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(money);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">void</span> <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">setMoney</span><span class="hljs-params">(String amount)</span></span>{
+            money = <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">new</span> BigDecimal(amount);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getUsername</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> name;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> String <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getPassword</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> password;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">public</span> BigDecimal <span class="hljs-title" style="color: rgb(166, 226, 46); font-weight: 700;">getMoney</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">return</span> money;
+        }
+
+    }
+    
+}</pre>
+  
+</body>
+</html>
