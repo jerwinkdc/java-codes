@@ -9,8 +9,7 @@
 </head>
 <body>
    
-<button class="js-textareacopybtn">Copy Code</button>
-<textarea class="js-copytextarea" style="visibility:hidden;width:5px;height:5px;">import java.io.BufferedReader;
+<textarea id="copyThisCode" class="copyCode" hidden>import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
@@ -323,22 +322,34 @@ public class ATM {
     }
     
 }</textarea>
+<button onclick="copyClipboard();">Copy Code</button>
     
 <script type="text/javascript">
-var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+document.addEventListener('click', function(event) {
+    // Only fire if the target has id copy
+    if (!event.target.matches('.copyCode')) return;
 
-copyTextareaBtn.addEventListener('click', function(event) {
-  var copyTextarea = document.querySelector('.js-copytextarea');
-  copyTextarea.select();
+    if (!navigator.clipboard) {
+      // Clipboard API not available
+      return;
+    }
+    const text = event.target.value;
+    try {
+      navigator.clipboard.writeText(text);
+      document.getElementById('copy-status').innerText = 'Copied to clipboard';
+      setTimeout(function() {
+        document.getElementById('copy-status').innerText = 'Click to copy';
+      }, 1200);
+    } catch (err) {
+      console.error('Failed to copy!', err);
+    }
+  },
+  false
+);
 
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Copying text command was ' + msg);
-  } catch (err) {
-    console.log('Oops, unable to copy');
-  }
-});
+function copyClipboard(){
+	document.getElementById("copyThisCode").click();
+}
 </script>
     
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
