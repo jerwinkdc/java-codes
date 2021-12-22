@@ -8,7 +8,27 @@
     <title>ATM.java (Java Main Class) [ALL-IN]</title>
 </head>
 <body>
+<button onclick="myFunction()">Copy Code</button>
+<script>
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("codeArea").value;
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+  
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+</script>
     
+<textarea id="codeArea">
+    Hello World
+</textarea>
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
 <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
 <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.InputStreamReader;
