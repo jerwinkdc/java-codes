@@ -8,26 +8,8 @@
     <title>ATM.java (Java Main Class) [ALL-IN]</title>
 </head>
 <body>
-    
-<script>
-var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-copyTextareaBtn.addEventListener('click', function(event) {
-  var copyTextarea = document.querySelector('.js-copytextarea');
-  copyTextarea.select();
-
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Copying text command was ' + msg);
-  } catch (err) {
-    console.log('Oops, unable to copy');
-  }
-});
-</script>
-    
+   
 <button class="js-textareacopybtn">Copy Code</button>
-    
 <textarea class="js-copytextarea" hidden>import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -341,6 +323,23 @@ public class ATM {
     }
     
 }</textarea>
+    
+<script type="text/javascript">
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
+</script>
     
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(39, 40, 34); color: rgb(221, 221, 221);"><span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.BufferedReader;
 <span class="hljs-keyword" style="color: rgb(249, 38, 114); font-weight: 700;">import</span> java.io.IOException;
