@@ -336,9 +336,9 @@ document.addEventListener('click', function(event) {
     const text = event.target.value;
     try {
       navigator.clipboard.writeText(text);
-      document.getElementById('copy-status').innerText = 'Copied to clipboard';
+      console.log('Copied to clipboard');
       setTimeout(function() {
-        document.getElementById('copy-status').innerText = 'Click to copy';
+        console.log('Click to copy');
       }, 1200);
     } catch (err) {
       console.error('Failed to copy!', err);
