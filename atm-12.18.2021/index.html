@@ -8,26 +8,26 @@
     <title>ATM.java (Java Main Class) [ALL-IN]</title>
 </head>
 <body>
-<button onclick="myFunction()">Copy Code</button>
+<button class="js-textareacopybtn">Copy Code</button>
     
 <script>
-function myFunction() {
-  /* Get the text field */
-  var copyText = document.getElementById("codeArea");
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
 
-  /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
-  
-  /* Alert the copied text */
-  alert("Code Copied!");
-}
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
 </script>
     
-<textarea id="codeArea" hidden>
+<textarea class="js-copytextarea" hidden>
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
