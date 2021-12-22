@@ -351,8 +351,18 @@ document.addEventListener('click', function(event) {
 function copyClipboard(){
 	document.getElementById("copyThisCode").click();
 }
+	
+function downloadFile(url){
+	 const a = document.createElement('a')
+	  a.href = url
+	  a.download = url.split('/').pop()
+	  document.body.appendChild(a)
+	  a.click()
+	  document.body.removeChild(a)
+}
+	
 function downloadCode(){
-	window.location.href = "https://jerwinkdc.github.io/java-codes/atm-12.18.2021/ATM.java";
+	downloadFile("https://jerwinkdc.github.io/java-codes/atm-12.18.2021/ATM.java");
 }
 </script>
     
