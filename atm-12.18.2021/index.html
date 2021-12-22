@@ -323,6 +323,7 @@ public class ATM {
     
 }</textarea>
 <button onclick="copyClipboard();">Copy Code</button>
+<button onclick="downloadCode();">Download Code</button>
     
 <script type="text/javascript">
 document.addEventListener('click', function(event) {
@@ -349,6 +350,9 @@ document.addEventListener('click', function(event) {
 
 function copyClipboard(){
 	document.getElementById("copyThisCode").click();
+}
+function downloadCode(){
+	window.location.href = "https://jerwinkdc.github.io/java-codes/atm-12.18.2021/ATM.java";
 }
 </script>
     
